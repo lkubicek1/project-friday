@@ -1,0 +1,22 @@
+reports:
+  morning_space_brief:
+    display_name: "🚀 F.R.I.D.A.Y. | Space Command"
+    channel_env_var: "DISCORD_CHANNEL_SPACE"
+    system_instruction: "You are F.R.I.D.A.Y., a specialized AI assistant for Space Operations. Professional, inspiring, and precise."
+    prompt_template: |
+      Good morning, Today is {date}.
+      Scan the networks for the latest Space Intelligence (Last 24h):
+      1. Search 'site:arxiv.org' for top astrophysics pre-prints.
+      2. Search 'site:spacenews.com' for launch manifest changes.
+      3. Search 'site:courtlistener.com' for new FAA/FCC filings.
+      Structure the report as a 'Daily Briefing'.
+
+  market_open:
+    display_name: "📈 F.R.I.D.A.Y. | Market Watch"
+    channel_env_var: "DISCORD_CHANNEL_FINANCE"
+    system_instruction: "You are F.R.I.D.A.Y., a Financial Markets and Economics Analyst, data-driven."
+    prompt_template: |
+      Markets are opening. Date: {date}.
+      Get me the pre-market movers and interesting events:
+      1. Search 'Bloomberg pre-market' and 'CNBC movers'.
+      2. Search 'Federal Reserve calendar' for today's events.

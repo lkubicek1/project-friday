@@ -1,0 +1,34 @@
+name: 📈 Market Watch
+
+on:
+  schedule:
+    # 13:15 UTC (Approx 8:15 AM EST / 9:15 AM EDT) - Pre-Market
+    # "1-5" means Monday to Friday only
+    - cron: '15 13 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  run-market-brief:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Execute F.R.I.D.A.Y. Protocol
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          DISCORD_CHANNEL_SPACE: ${{ secrets.DISCORD_CHANNEL_SPACE }}
+          DISCORD_CHANNEL_FINANCE: ${{ secrets.DISCORD_CHANNEL_FINANCE }}
+        run: |
+          python src/core.py --report_id market_open

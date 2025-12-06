@@ -1,0 +1,29 @@
+name: 🛠️ Manual Test Run
+
+on:
+  workflow_dispatch:
+    inputs:
+      report_id:
+        description: 'Report ID to run (e.g., morning_space_brief)'
+        required: true
+        default: 'morning_space_brief'
+
+jobs:
+  run-manual:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - run: pip install -r requirements.txt
+
+      - name: Run Custom Report
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          DISCORD_CHANNEL_SPACE: ${{ secrets.DISCORD_CHANNEL_SPACE }}
+          DISCORD_CHANNEL_FINANCE: ${{ secrets.DISCORD_CHANNEL_FINANCE }}
+        run: |
+          python src/engine.py --report_id ${{ inputs.report_id }}

@@ -1,0 +1,34 @@
+name: 🚀 Space Command Brief
+
+on:
+  schedule:
+    # 08:00 UTC (Approx 3:00 AM EST / 4:00 AM EDT)
+    - cron: '0 8 * * *'
+  workflow_dispatch: # Allows manual button click
+
+jobs:
+  run-space-brief:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Execute F.R.I.D.A.Y. Protocol
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          # Pass ALL channel secrets so the script can choose the right one
+          DISCORD_CHANNEL_SPACE: ${{ secrets.DISCORD_CHANNEL_SPACE }}
+          DISCORD_CHANNEL_FINANCE: ${{ secrets.DISCORD_CHANNEL_FINANCE }}
+        run: |
+          python src/core.py --report_id morning_space_brief
