@@ -9,6 +9,7 @@ on:
 
 jobs:
   run-market-brief:
+    if: false  # Disabled
     runs-on: ubuntu-latest
 
     steps:

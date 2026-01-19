@@ -10,6 +10,7 @@ on:
 
 jobs:
   run-manual:
+    if: false  # Disabled
     runs-on: ubuntu-latest
 
     steps:

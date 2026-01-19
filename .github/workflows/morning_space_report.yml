@@ -8,6 +8,7 @@ on:
 
 jobs:
   run-space-brief:
+    if: false  # Disabled
     runs-on: ubuntu-latest
     
     steps:
